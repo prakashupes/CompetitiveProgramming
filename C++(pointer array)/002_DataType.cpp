@@ -6,7 +6,7 @@ int main()
     // Long int is same as int
 
     cout <<" size of int "<<sizeof(a)<<"bytes"<<endl;
-    cout<<a<<endl;
+    cout<<"Will give -ve num bcz of range "<<a<<endl;
     long long int b=2147483648;
     cout<<b;
 

@@ -6,7 +6,7 @@ using namespace std;
 class Hash
 {
 	int BUCKET; // No of buckets
-	list<int> *table  ; //Represents a hash table
+	list<int> *table ; //Represents a hash table
 	public:
 	Hash(int BUCKET)
 	{
@@ -37,7 +37,7 @@ void deleteItem(int key)
   int index = hashFunction(key);
 
   // find the key in (inex)th list
-  list <int> :: iterator i;
+ /* list <int> :: iterator i;
   for (i = table[index].begin();
            i != table[index].end(); i++) {
     if (*i == key)
@@ -47,7 +47,12 @@ void deleteItem(int key)
   // if key is found in hash table, remove it
   if (i != table[index].end())
     table[index].erase(i);
+
+*/
+
+    table[index].remove(key);
 }
+
 
 };
 int main()

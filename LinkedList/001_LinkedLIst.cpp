@@ -38,6 +38,37 @@ Node* insertAtEnd(int key,Node* head)
     curr->next=new Node(key);
     return head;
 }
+
+Node* deleteEnd(Node * head)
+{
+    Node *curr=head;
+    Node *prev=nullptr;
+    while(curr->next!=nullptr)
+    {
+        prev=curr;
+        curr=curr->next;
+
+    }
+    prev->next=nullptr;
+    return head;
+
+}
+
+Node* deleteRandom(int key, Node* head)
+{
+    Node *curr=head;
+    Node *prev=nullptr;
+    while(curr->key!=key)
+    {
+        prev=curr;
+        curr=curr->next;
+
+    }
+   prev->next=curr->next;
+    return head;
+
+
+}
 void display(Node* head)
 {
     while(head!=nullptr)
@@ -68,5 +99,16 @@ int main()
     insertAtEnd(50,head2);
 
     display(head2);
+
+    cout<<"After delete\n";
+    deleteEnd(head2);
+    deleteEnd(head2);
+    display(head2);
+
+
+    cout<<"\nDelete random key head(45)"<<endl;
+    deleteRandom(45,head);
+    display(head);
+
 
 }

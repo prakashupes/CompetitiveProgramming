@@ -2,6 +2,7 @@
 #include<string>
 
 //Assumption small later
+//use ascii code
 using namespace std;
 int main()
 {

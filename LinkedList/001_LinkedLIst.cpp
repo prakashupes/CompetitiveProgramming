@@ -69,6 +69,12 @@ Node* deleteRandom(int key, Node* head)
 
 
 }
+Node * deleteBeg(Node* head)
+{
+    head=head->next;
+    return head;
+
+}
 void display(Node* head)
 {
     while(head!=nullptr)
@@ -90,7 +96,7 @@ int main()
 
     display(head);
 
-    cout<<"Print 2nd List\n";
+    cout<<"\nPrint 2nd List\n";
 
     Node *head2=nullptr;
     head2=insertAtEnd(20,head2);
@@ -100,7 +106,7 @@ int main()
 
     display(head2);
 
-    cout<<"After delete\n";
+    cout<<"\nAfter delete Last head2(40,50)\n";
     deleteEnd(head2);
     deleteEnd(head2);
     display(head2);
@@ -110,5 +116,8 @@ int main()
     deleteRandom(45,head);
     display(head);
 
+    cout<<"\n\nDelete beg head"<<endl;
+    head=deleteBeg(head);
+    display(head);
 
 }

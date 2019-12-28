@@ -95,4 +95,8 @@ int main()
     cout<<"\nHead2: \n";
     display(head2);
 
+    cout<<"\n\n**It is not circular, so if we print from\n mid then start element will missed.\n\n";
+    cout<<"Head2, from 30\n";
+    display(head2->next->next);
+
 }

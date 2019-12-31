@@ -23,9 +23,9 @@ class Graph
         for(auto x:graph)
         {
             cout<<x.first<<"->";
-            for(auto d:x)
+            for(auto d:x.second)
             {
-                cout<<d<<"->";
+                cout<<d<<" ";
             }
             cout<<"\n";
         }
@@ -36,6 +36,11 @@ int main()
 {
     Graph<string> g;
     g.insertEdge("modi","putin");
+    g.insertEdge("modi","trump");
+    g.insertEdge("modi","kim",false);
+    g.insertEdge("putin","trump",false);
+    g.insertEdge("trump","kim");
+
     g.traverse();
 
 }

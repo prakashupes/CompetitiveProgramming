@@ -6,6 +6,7 @@
 #include<map>
 #define INT_MAX 10000;
 using namespace std;
+
 template <typename T>
 class Graph
 {

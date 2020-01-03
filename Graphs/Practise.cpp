@@ -1,7 +1,26 @@
 #include<iostream>
 #include<vector>
-
+#include<map>
 using namespace std;
+void dfsHelper(int src,vector<int>arr[],map<int,bool> &visited)
+{
+    visited[src]=true;
+    cout<<src<<" ";
+    for(int x:arr[src])
+    {
+        if(!visited[x])
+        {
+            visited[x]=true;
+            dfsHelper(x,arr,visited);
+        }
+    }
+
+}
+void dfs(int src, vector<int> arr[])
+{
+    map<int,bool> visited;
+    dfsHelper(src,arr,visited);
+}
 
 int main()
 {
@@ -30,6 +49,7 @@ int main()
         cout<<endl;
 
     }
+    dfs(0,arr);
 
 
 }

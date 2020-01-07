@@ -1,42 +1,54 @@
 
-//Not generic
-
 #include<bits/stdc++.h>
 using namespace std;
 
-
-void bfs(unordered_map<int,list<int>> adjList)
+template <typename T>
+class Graph
 {
-    map<int,int> inorder;
-        queue<int>q;
+    unordered_map<T,list<T>> adjList;
+    public:
+    void addEdge(T node1, T node2, bool bidir=false)
+    {
+        adjList[node1].push_back(node2);
+        if(bidir)
+        {
+            adjList[node2].push_back(node1);
+        }
+
+    }
+
+    void bfsTopological()
+    {
+        //map<T,bool>visited;
+        map<T,int> indegree;
+        queue<T>q;
 
         //Initialize all inoreder 0
         for(auto x:adjList)
         {
-            int node=x.first;
+            T node=x.first;
 
-                inorder[node]=0;
+                indegree[node]=0;
                 //visited[node]=false;
-
         }
 
-        //Add inorder for each nodes
+        //Add indegree for each nodes
 
         for(auto x:adjList)
         {
-            int node=x.first;
+            T node=x.first;
             for(auto n:adjList[node])
             {
-                inorder[n]++;
+                indegree[n]++;
             }
         }
 
-        //insert nodes into queue with inorder of 0
+        //insert nodes into queue with indegree of 0
 
         for(auto x:adjList)
         {
-            int node=x.first;
-            if(inorder[node]==0)
+            T node=x.first;
+            if(indegree[node]==0)
             {
                 q.push(node);
             }
@@ -45,15 +57,15 @@ void bfs(unordered_map<int,list<int>> adjList)
 
         while(!q.empty())
         {
-            int node=q.front();
+            T node=q.front();
             q.pop();
             cout<<node<<" ";
             //Reduce degree of neighbour of poped node
 
-            for(auto x:adjList[node])
+            for(T x:adjList[node])
             {
-                inorder[x]--;
-                if(inorder[x]==0)
+                indegree[x]--;
+                if(indegree[x]==0)
                 {
                     q.push(x);
                 }
@@ -64,23 +76,19 @@ void bfs(unordered_map<int,list<int>> adjList)
 
     }
 
-
-
-
+};
 
 int main()
 {
-    unordered_map<int,list<int>> adjList;
-    adjList[1].push_back(4);
-    adjList[1].push_back(2);
-    adjList[2].push_back(3);
-    adjList[3].push_back(5);
-    adjList[4].push_back(3);
-    adjList[4].push_back(5);
-    adjList[5].push_back(6);
-    adjList[7].push_back(4);
-    bfs(adjList);
-
-
+    Graph<int>g;
+    g.addEdge(1,2);
+    g.addEdge(1,4);
+    g.addEdge(2,3);
+    g.addEdge(4,3);
+    g.addEdge(7,4);
+    g.addEdge(3,5);
+    g.addEdge(4,5);
+    g.addEdge(5,6);
+    //g.bfsTopological();
 
 }

@@ -1,18 +1,18 @@
+
 #include<bits/stdc++.h>
 using namespace std;
 
 template <typename T>
 class Graph
 {
-    map<T,list<T>> adjList;
+    unordered_map<T,list<T>> adjList;
     public:
-
-    void addEdge(T u,T v,bool bidir=false)
+    void addEdge(T node1, T node2, bool bidir=false)
     {
-        adjList[u].push_back(v);
+        adjList[node1].push_back(node2);
         if(bidir)
         {
-            adjList[v].push_back(u);
+            adjList[node2].push_back(node1);
         }
 
     }
@@ -20,7 +20,7 @@ class Graph
     void bfsTopological()
     {
         //map<T,bool>visited;
-        map<T,int> inorder;
+        map<T,int> indegree;
         queue<T>q;
 
         //Initialize all inoreder 0
@@ -28,28 +28,27 @@ class Graph
         {
             T node=x.first;
 
-                inorder[node]=0;
+                indegree[node]=0;
                 //visited[node]=false;
-
         }
 
-        //Add inorder for each nodes
+        //Add indegree for each nodes
 
         for(auto x:adjList)
         {
             T node=x.first;
             for(auto n:adjList[node])
             {
-                inorder[n]++;
+                indegree[n]++;
             }
         }
 
-        //insert nodes into queue with inorder of 0
+        //insert nodes into queue with indegree of 0
 
         for(auto x:adjList)
         {
             T node=x.first;
-            if(inorder[node]==0)
+            if(indegree[node]==0)
             {
                 q.push(node);
             }
@@ -65,8 +64,8 @@ class Graph
 
             for(T x:adjList[node])
             {
-                inorder[x]--;
-                if(inorder[x]==0)
+                indegree[x]--;
+                if(indegree[x]==0)
                 {
                     q.push(x);
                 }
@@ -81,7 +80,7 @@ class Graph
 
 int main()
 {
-    Graph <int> g;
+    Graph<int>g;
     g.addEdge(1,2);
     g.addEdge(1,4);
     g.addEdge(2,3);
@@ -90,6 +89,6 @@ int main()
     g.addEdge(3,5);
     g.addEdge(4,5);
     g.addEdge(5,6);
-    g.bfsTopological();
+    //g.bfsTopological();
 
 }

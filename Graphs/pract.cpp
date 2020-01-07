@@ -1,32 +1,19 @@
+
+//Not generic
+
 #include<bits/stdc++.h>
 using namespace std;
 
-template <typename T>
-class Graph
+
+void bfs(unordered_map<int,list<int>> adjList)
 {
-    map<T,list<T>> adjList;
-    public:
-
-    void addEdge(T u,T v,bool bidir=false)
-    {
-        adjList[u].push_back(v);
-        if(bidir)
-        {
-            adjList[v].push_back(u);
-        }
-
-    }
-
-    void bfsTopological()
-    {
-        //map<T,bool>visited;
-        map<T,int> inorder;
-        queue<T>q;
+    map<int,int> inorder;
+        queue<int>q;
 
         //Initialize all inoreder 0
         for(auto x:adjList)
         {
-            T node=x.first;
+            int node=x.first;
 
                 inorder[node]=0;
                 //visited[node]=false;
@@ -37,7 +24,7 @@ class Graph
 
         for(auto x:adjList)
         {
-            T node=x.first;
+            int node=x.first;
             for(auto n:adjList[node])
             {
                 inorder[n]++;
@@ -48,7 +35,7 @@ class Graph
 
         for(auto x:adjList)
         {
-            T node=x.first;
+            int node=x.first;
             if(inorder[node]==0)
             {
                 q.push(node);
@@ -58,12 +45,12 @@ class Graph
 
         while(!q.empty())
         {
-            T node=q.front();
+            int node=q.front();
             q.pop();
             cout<<node<<" ";
             //Reduce degree of neighbour of poped node
 
-            for(T x:adjList[node])
+            for(auto x:adjList[node])
             {
                 inorder[x]--;
                 if(inorder[x]==0)
@@ -77,19 +64,23 @@ class Graph
 
     }
 
-};
+
+
+
 
 int main()
 {
-    Graph <int> g;
-    g.addEdge(1,2);
-    g.addEdge(1,4);
-    g.addEdge(2,3);
-    g.addEdge(4,3);
-    g.addEdge(7,4);
-    g.addEdge(3,5);
-    g.addEdge(4,5);
-    g.addEdge(5,6);
-    g.bfsTopological();
+    unordered_map<int,list<int>> adjList;
+    adjList[1].push_back(4);
+    adjList[1].push_back(2);
+    adjList[2].push_back(3);
+    adjList[3].push_back(5);
+    adjList[4].push_back(3);
+    adjList[4].push_back(5);
+    adjList[5].push_back(6);
+    adjList[7].push_back(4);
+    bfs(adjList);
+
+
 
 }

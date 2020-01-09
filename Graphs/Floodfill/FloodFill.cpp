@@ -43,8 +43,8 @@ int main()
         cout<<endl;
      }
      floodFill(matrix,'*','.',5,10);
-     floodFill(matrix,'`','.',0,0);//For outside of region
-
+    // floodFill(matrix,'`','.',0,0);
+     //For outside of region
      cout<<"Colored Graph:\n"<<endl;
      for(int i=0;i<R;i++)
      {
@@ -54,7 +54,4 @@ int main()
         }
         cout<<endl;
      }
-
-
-
 }

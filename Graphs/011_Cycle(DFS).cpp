@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<map>
 #include<unordered_map>
@@ -42,21 +43,23 @@ class Graph
 
         for(auto neighbour: graph[src])
         {
-            if(visited[neighbour]==true && parent[src]==neighbour)
+            if(visited[neighbour]==true && parent[src]!=neighbour)
             {
-                return false;
+                return true;
             }
 
             if(!visited[neighbour])
             {
-                if(dfsHelper(neighbour,visited));
+                //visited[neighbour]=true;
+                parent[neighbour]=src;
+                if(dfsHelper(neighbour,visited,parent))
                     return true;
-                else return true;
+                else return false;
             }
         }
     }
 
-    void dfs(T src)
+    void cycle(T src)
     {
         map<T,bool> visited;//
         map<T,T> parent;
@@ -78,9 +81,14 @@ class Graph
 int main()
 {
     Graph<int> g;
-
+    g.insertEdge(0,1);
+    g.insertEdge(0,3);
+    g.insertEdge(1,2);
+    //g.insertEdge(3,2);
 
     g.traverse();
+    g.cycle(0);
+
 
 
 }

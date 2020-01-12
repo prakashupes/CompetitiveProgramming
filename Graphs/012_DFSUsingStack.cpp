@@ -2,7 +2,7 @@
 #include<map>
 #include<unordered_map>
 #include<list>
-#include<queue>
+#include<stack>
 using namespace std;
 template <typename T>
 class Graph
@@ -33,30 +33,33 @@ class Graph
         }
     }
 
-    void dfsHelper(T src, map<T,bool> &visited)
-    {
-        visited[src]=true;
-        cout<<src<<" ";
 
-        //visit all the neighbours
-
-        for(auto neighbour: graph[src])
-        {
-
-
-            if(!visited[neighbour])
-            {
-                dfsHelper(neighbour,visited);
-
-            }
-        }
-    }
 
     void dfs(T src)
     {
         map<T,bool> visited;//
        // map<T,T> parent;
-        dfsHelper(src,visited);
+        stack<T> s;
+        s.push(src);
+        visited[src]=true;
+
+        while(!s.empty())
+        {
+            T node =s.top();
+            s.pop();
+            cout<<node<<" ";
+            for(auto neigh: graph[node])
+            {
+                if(!visited[neigh])
+                {
+                    visited[neigh]=true;
+                    s.push(neigh);
+
+                }
+
+            }
+
+        }
 
 
     }

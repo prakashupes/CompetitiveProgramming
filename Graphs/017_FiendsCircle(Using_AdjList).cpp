@@ -48,7 +48,7 @@ int main()
     Friend f;
     f.makeFriend(0,1);
     f.makeFriend(0,3);
-     f.makeFriend(2,4);
-  //  f.makeFriend(2,0);
+    f.makeFriend(2,4);
+    f.makeFriend(2,0);
     f.isFriend(2,0);
 }

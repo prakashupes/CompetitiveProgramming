@@ -68,9 +68,10 @@ int Krushkal(Edge graph[],int v)
         if(x!=y) //Cycle not exist
         {
             res=res+graph[i].wt;
-            s++;
+
             Union(x,y);
-           // MST[i]=graph[i];
+            MST[s]=graph[i];
+            s++;
 
         }
 
@@ -122,7 +123,7 @@ int main()
 
     parent=new int[v];
     Rank=new int[v];
-  //  MST=new Edge[v-1];
+    MST=new Edge[v-1];
     for(int i=0;i<v;i++)
     {
         parent[i]=i;
@@ -130,7 +131,10 @@ int main()
     }
     int res=Krushkal(graph,v);
     cout<<res<<endl;
-
+    for(int i=0;i<v-1;i++)
+    {
+        cout<<MST[i].src<<" "<<MST[i].des<<" "<<MST[i].wt<<endl;
+    }
 
 
 

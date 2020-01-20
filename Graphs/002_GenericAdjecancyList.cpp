@@ -6,7 +6,7 @@ template <typename T>
 class Graph
 {
 
-    unordered_map<T,list<T>> graph;
+    unordered_map<T,list<T>> graph;// it is adjList
     public:
     void insertEdge(T node1, T node2, bool bidir=true)
     {

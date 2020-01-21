@@ -50,6 +50,12 @@ int main()
         parent[i]=i;
         _rank[i]=0;
     }
+    cout<<"Before union"<<endl;
+    for(int i=0;i<n;i++)
+    {
+        cout<<parent[i]<<" "<<_rank[i]<<" "<<endl;
+
+    }
     Union(3,4);
     Union(2,3);
     Union(1,2);

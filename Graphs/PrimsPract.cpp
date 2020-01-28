@@ -36,7 +36,7 @@ int findMin( map<int,bool> &visited, map<int,int> &weigth,int v)
     return minWtNode;
 
 }
-void prims(Graph g,int v)
+void prims(Graph g,int v,int src)
 {
     map<int,bool> visited;
     map<int, int> parent;
@@ -46,8 +46,8 @@ void prims(Graph g,int v)
         visited[i]=false;
         weigth[i]=inf;
     }
-    parent[0]=-1;
-    weigth[0]=0;
+   // parent[0]=-1;
+    weigth[src]=0;
     for(int i=0;i<v;i++)
     {
         int minWtNode=findMin(visited,weigth,v);
@@ -56,10 +56,10 @@ void prims(Graph g,int v)
         {
             if(!visited[neigh.first]) //negh.first represents destination, 0->1 1 is neigh.first
             {
-                if(weigth[neigh.first]>neigh.second)
+                if(weigth[neigh.first]>neigh.second+weigth[minWtNode])
                 {
-                    weigth[neigh.first]=neigh.second;
-                    parent[neigh.first]=minWtNode;
+                    weigth[neigh.first]=neigh.second+weigth[minWtNode];
+                  //  parent[neigh.first]=minWtNode;
                 } //neigh.second reprsnt wt fro adjList
             }
         }
@@ -67,7 +67,7 @@ void prims(Graph g,int v)
     }
     for(int i=1;i<v;i++)
     {
-        cout<<i<<"->"<<parent[i]<<" :"<<weigth[i]<<endl;
+        cout<<i<<" is at distance"<<" :"<<weigth[i]<<endl;
 
     }
 
@@ -78,16 +78,12 @@ void prims(Graph g,int v)
 int main()
 
 {
-    int v=6;
+    int v=3;
     Graph g(v);
-    g.addEdge(0,1,4);
-    g.addEdge(0,2,5);
+    g.addEdge(0,1,2);
+    g.addEdge(0,2,4);
     g.addEdge(1,2,3);
-    g.addEdge(1,3,7);
-    g.addEdge(2,3,2);
-    g.addEdge(1,4,9);
-    g.addEdge(1,5,8);
-    g.addEdge(4,5,11);
-    prims(g,v);
+
+    prims(g,v,0);
 
 }

@@ -52,13 +52,15 @@ class Graph
             auto p=*(s.begin()); //Gives first pair of set, ie min wt/dist
             T node=p.second; //Node of pair
 
-            int dis=p.first;
+            int dis=p.first;//distance or weight
             s.erase(s.begin());
 
             for(auto child:adjList[node])
             {
+                cout<<child.first<<" ";
                 if(dis+child.second<distance[child.first])
                 {
+                    cout<<child.first<<" ";
                     //In the set updation is not possible
                     //So, reove old pair and insert new pair
                     T destination =child.first;
@@ -73,6 +75,7 @@ class Graph
                     s.insert(make_pair(distance[destination],destination));
 
                 }
+                cout<<endl;
             }
 
 
@@ -92,10 +95,12 @@ class Graph
 int main()
 {
     Graph<int >g;
-    g.addEdge(0,1,2);
-    g.addEdge(0,2,4);
-    g.addEdge(1,2,3);
+    g.addEdge(0,1,1);
+    g.addEdge(0,2,1);
+    g.addEdge(1,2,1);
     g.printList();
-    g.Dijikstra(0);
+    int src=0;
+    cout<<"From "<<src<<" :\n";
+    g.Dijikstra(src);
 
 }

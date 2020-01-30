@@ -41,33 +41,39 @@ void prims(Graph g,int v,int src)
     map<int,bool> visited;
     map<int, int> parent;
     map<int,int> weigth;
+
+    //1.First make inf to all weight
+
     for(int i=0;i<v;i++)
     {
-        visited[i]=false;
         weigth[i]=inf;
+        visited[i]=false;
     }
-   // parent[0]=-1;
     weigth[src]=0;
+    parent[src]=-1;
+
+    //Visit all vertices
+
     for(int i=0;i<v;i++)
     {
-        int minWtNode=findMin(visited,weigth,v);
-        visited[minWtNode]=true;
-        for(auto neigh: g.adjList[minWtNode])
+        int minWtVert=findMin(visited,weigth,v);
+        visited[minWtVert]=true;
+
+        //Update its all neighbours
+        for(auto neigh:g.adjList[minWtVert])
         {
-            if(!visited[neigh.first]) //negh.first represents destination, 0->1 1 is neigh.first
+            if(!visited[neigh.first] && (weigth[neigh.first]>neigh.second))
             {
-                if(weigth[neigh.first]>neigh.second+weigth[minWtNode])
-                {
-                    weigth[neigh.first]=neigh.second+weigth[minWtNode];
-                  //  parent[neigh.first]=minWtNode;
-                } //neigh.second reprsnt wt fro adjList
+
+                weigth[neigh.first]=neigh.second;
+                parent[neigh.first]=minWtVert;
             }
         }
-
     }
+
     for(int i=1;i<v;i++)
     {
-        cout<<i<<" is at distance"<<" :"<<weigth[i]<<endl;
+        cout<<i<<"->"<<parent[i]<<" :"<<weigth[i]<<endl;
 
     }
 

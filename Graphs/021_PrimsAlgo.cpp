@@ -38,6 +38,7 @@ int findMin( map<int,bool> &visited, map<int,int> &weigth,int v)
 }
 void prims(Graph g,int v)
 {
+    int start=2;
     map<int,bool> visited;
     map<int, int> parent;
     map<int,int> weigth;
@@ -46,8 +47,8 @@ void prims(Graph g,int v)
         visited[i]=false;
         weigth[i]=inf;
     }
-    parent[0]=-1;
-    weigth[0]=0;
+    parent[start]=-1;
+    weigth[start]=0;
     for(int i=0;i<v;i++)
     {
         int minWtNode=findMin(visited,weigth,v);
@@ -65,7 +66,7 @@ void prims(Graph g,int v)
         }
 
     }
-    for(int i=1;i<v;i++)
+    for(int i=0;i<v;i++)
     {
         cout<<i<<"->"<<parent[i]<<" :"<<weigth[i]<<endl;
 
@@ -78,7 +79,7 @@ void prims(Graph g,int v)
 int main()
 
 {
-    int v=6;
+    /*int v=6;
     Graph g(v);
     g.addEdge(0,1,4);
     g.addEdge(0,2,5);
@@ -88,6 +89,13 @@ int main()
     g.addEdge(1,4,9);
     g.addEdge(1,5,8);
     g.addEdge(4,5,11);
+    prims(g,v);
+    */
+    int v=3;
+    Graph g(v);
+    g.addEdge(0,1,1);
+    g.addEdge(0,2,1);
+    g.addEdge(2,1,1);
     prims(g,v);
 
 }

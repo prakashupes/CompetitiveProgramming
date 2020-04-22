@@ -89,8 +89,9 @@ Node* pairWiseSwap(struct Node* head) {
   {
       Node *newCurr=curr->next->next;
       prev->next=curr->next;
-      prev=curr;
+      
       curr->next->next=curr;
+      prev=curr;
       curr=newCurr;
   }
     prev->next=curr;

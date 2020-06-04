@@ -1,18 +1,19 @@
 #include<iostream>
 using namespace std;
-bool isSorted(int arr[],int n)
+bool isSorted(int *arr,int n)
 {
-    if(n==0 || n==1)
-        return true;
-    if(arr[n-1]>=arr[n-2] && isSorted(arr,n-1))
-        return true;
-    else
-        return false;
+   if(n==1)
+   {
+   	return true;
+   }
+   if(arr[0]<arr[1] && isSorted(arr+1,n-1))
+   	return true;
+   return false;
 
 }
 int main()
 {
-    int arr[]={1,2,3,4,3,5};
+    int arr[]={1,2,3,4,5};
     if(isSorted(arr,5))
         cout<<"Sorted";
     else

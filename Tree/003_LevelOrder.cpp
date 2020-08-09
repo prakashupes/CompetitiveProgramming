@@ -32,29 +32,7 @@ void levelOerder(Node *root)
 	}
 
 }
-void levelOerder_M2(Node *root)
-{
-	queue<Node *> q;
-	q.push(root);
-	while(!q.empty())
-	{
-		int s=q.size();
-		
-		for(int i=0;i<s;i++)
-		{
-			Node *temp=q.front();
-			q.pop();
-			cout<<temp->key<<" ";
-			if(temp->left!=NULL) q.push(temp->left);
-			if(temp->right!=NULL) q.push(temp->right);
-		
-		}
-		
-		cout<<endl;
-	
-	}
 
-}
 int main()
 {
 	MyTree:: Node *n=new MyTree::Node(5); //root is 5

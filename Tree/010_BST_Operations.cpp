@@ -40,6 +40,74 @@ void inOrder(Node *root)
 }
 
 
+
+
+int findSuccessor(Node *root)
+{
+	Node *curr=root->right;
+	while(curr->left!=NULL)
+	{
+		curr=curr->left;
+	}
+	return curr->key;
+
+}
+
+Node* findDecendants (Node * root)
+{
+	root =root->left;
+	while(root->right!=NULL) root= root->right;
+	return root;
+
+}
+Node *deleteNode(Node *root,int k)
+{
+	if(root==NULL) return NULL;
+	
+	if(root->key >k)
+	{
+		root->left = deleteNode (root->left,k);
+	}
+	else if(root->key < k) root->right = deleteNode (root->right,k);
+	else if(root->key == k)
+	{
+		if(root->left == NULL)
+		{
+			Node *temp =root->right;
+			delete root;
+			return temp;
+		}
+		
+		if(root->right == NULL)
+		{
+			Node *temp =root->left;
+			delete root;
+			return temp;
+		}
+		
+		else
+		{
+			
+			Node * temp = findDecendants(root);
+			
+			/***M2
+			int k= findSuccessor(root);
+			root->key=k;
+			****/
+			
+			root->key = temp->key;
+			root->right = deleteNode(root->right,temp->key);
+			
+		
+		}
+		
+	
+	}
+	return root;
+
+}
+
+
 void levelOerder(Node *root)
 {
 	queue<Node *> q;

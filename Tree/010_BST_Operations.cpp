@@ -40,7 +40,17 @@ void inOrder(Node *root)
 }
 
 
+bool search(Node *root, int key)
+{
+	if(root==NULL) return false;
+	
+	if(root->key == key) return true;
+	
+	if(root->key > key) return search(root->left,key);
+	else return search(root->right,key);
+	
 
+}
 
 int findSuccessor(Node *root)
 {

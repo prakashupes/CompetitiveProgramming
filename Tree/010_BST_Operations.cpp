@@ -106,7 +106,8 @@ Node *deleteNode(Node *root,int k)
 			****/
 			
 			root->key = temp->key;
-			root->right = deleteNode(root->right,temp->key);
+			deleteNode(root->left,temp->key);
+			
 			
 		
 		}
@@ -157,10 +158,10 @@ int main()
 	insert(&root,25);
 	inOrder(root);
 	cout<<endl;
-	cout<<search(root,9)<<endl;
-	cout<<search(root,10)<<endl;
+	//cout<<search(root,9)<<endl;
+	//cout<<search(root,10)<<endl;
 	deleteNode(root,10);
-	//inOrder(root);
-	levelOerder(root);
+	inOrder(root);
+	//levelOerder(root);
 
 }

@@ -1,7 +1,8 @@
 #include <iostream>
+#include <vector>
 using namespace  std;
 
-int isPrime(int n)
+int IsPrime(int n)
 {
 	if(n==1 || n==2)
 		return 1;
@@ -12,18 +13,35 @@ int isPrime(int n)
 	}
 	return 1;
 }
+
+void seive(vector<bool> &isPrime, int n)
+{
+	for(int i=2;i<=n;i++)
+	{
+	
+		if(isPrime[i])
+		{
+			
+			for(int j=i*i;j<=n;j+=i)
+			{
+				isPrime[j]=false;
+			}
+		}
+		
+	
+	}
+
+}
 int main()
 {
 	int n;
 	cout<<"Num: \n";
 	cin>>n;
-	if(isPrime(n)==1)
+	vector<bool> isPrime (n+1,true);
+	seive(isPrime,n);
+	for(int i=2;i<=n;i++)
 	{
-		cout<<"Prime\n";
-	}
-	else
-	{
-		cout<<"Not prime!!\n";
+		if(isPrime[i]) cout<<i<<endl;
 	}
 
 }

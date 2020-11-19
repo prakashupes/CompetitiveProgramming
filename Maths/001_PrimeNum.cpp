@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
-using namespace  std;
-
+using namespace  std;s
 int IsPrime(int n)
 {
 	if(n==1 || n==2)
@@ -16,21 +15,16 @@ int IsPrime(int n)
 
 void seive(vector<bool> &isPrime, int n)
 {
-	for(int i=2;i<=n;i++)
+	for(int i=2;i*i<=n;i++)
 	{
-	
 		if(isPrime[i])
-		{
-			
+		{	
 			for(int j=i*i;j<=n;j+=i)
 			{
 				isPrime[j]=false;
 			}
 		}
-		
-	
 	}
-
 }
 int main()
 {
@@ -43,6 +37,5 @@ int main()
 	{
 		if(isPrime[i]) cout<<i<<endl;
 	}
-
 }
 

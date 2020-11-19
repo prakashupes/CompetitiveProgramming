@@ -106,7 +106,9 @@ Node *deleteNode(Node *root,int k)
 			****/
 			
 			root->key = temp->key;
-			deleteNode(root->left,temp->key);
+			root->left=deleteNode(root->left,temp->key);
+			/* We are storing it becz if the right node is deleted then { This section if(root->right == NULL)} will return NULL
+			And we need to store it in right  */
 			
 			
 		

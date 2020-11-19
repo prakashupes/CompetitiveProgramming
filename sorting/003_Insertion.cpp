@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+/*
 void sort(int *arr,int n)
 {
 	if(n==0 || n==1) return;
@@ -15,6 +15,25 @@ void sort(int *arr,int n)
 		
 		}
 		arr[hole]=val;
+	}
+}
+*/
+
+void sort(int *arr,int n)
+{
+	if(n==0 || n==1 ) return ;
+	
+	for(int i=1;i<n;i++)
+	{
+		int j=i;
+		int val=arr[j];
+		while(j>0 && arr[j-1] > arr[j])
+		{
+			arr[j]=arr[j-1];
+			j--;
+		}
+		arr[j]=val;
+	
 	}
 }
 int main()

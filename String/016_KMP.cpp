@@ -108,15 +108,15 @@ void KMP(string str, string pat)
 int main()
 {
 	
-	string str="ababaaaaa";
-	string pat="aaaa";
+	string str="CREATE TABLE Persons (PersonID int, LastName varchar(255),FirstName varchar(255) not null primary key, Address varchar(255), City varchar(255));";
+	string pat="primary key";
 	
-	KMP(str,pat);
-	cout<<endl;
-	all_Occ(str,pat);
+	//KMP(str,pat);
+	//cout<<endl;
+	//all_Occ(str,pat);
 	
 	//Using predifend find()
-	//cout<<isPreset(str,pat)<<endl;
+	cout<<isPreset(str,pat)<<endl;
 	
 	
 }

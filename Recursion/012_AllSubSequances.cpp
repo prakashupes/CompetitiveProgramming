@@ -2,16 +2,20 @@
 using namespace std;
 
 
-void substrings_m2(string str,string op)
+
+
+void print(string str,string op,int i) //Method 2
 {
-	if(str.length()==0)
-	{
-		cout<<op<<" ";
-		return;
-	}
-	substrings_m2(str.substr(1),op);
-	
-	substrings_m2(str.substr(1),op+str[0]);
+    if(i>=str.length())
+    {
+        cout<<op<<" ";
+        return;
+    }
+    
+    
+    
+    print(str,op,i+1);
+    print(str,op+str[i],i+1);
 
 }
 
@@ -42,7 +46,7 @@ int main()
 	cout<<endl;
 	string str2="abc";
 	string op="";
-	substrings_m2(str2,op);
+	print(str2,op,0);
 	
 
 }

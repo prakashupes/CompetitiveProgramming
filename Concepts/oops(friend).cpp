@@ -32,7 +32,6 @@ class B : public A{
     }
 
 };
-
 class C{
     public:
     void printA()
@@ -45,11 +44,35 @@ class C{
     }
 };
 
+//Friend function
+class Distance
+{
+    private:
+    int meter;
+
+    
+    public:
+    friend void accessM(Distance d);
+    Distance(int m):meter(m){};
+
+
+};
+
+void accessM(Distance d)
+{
+    cout<<d.meter;
+}
+
+
+
 int main()
 {
     B b;
     C c;
     b.printA();
     c.printA();    
+
+    Distance d(10);
+    accessM(d);
 
 }

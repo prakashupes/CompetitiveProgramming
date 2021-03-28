@@ -1,4 +1,6 @@
 #include<iostream>
+
+#include<algorithm>
 #define M 100
 #define N 100
 using namespace std;
@@ -56,46 +58,38 @@ int lcs_2 (string s1, string s2, int m,int n)
 }
 
 
-string lcs_print(int dp[][N],string s1, string s2, int m,int n,) //4 3
+void lcs_print(int dp[][N],string s1, string s2, int m,int n) //4 3
 {
-    if(dp[m][n]!=-1) return dp[m][n];
-    //base
-    if(m == 0 || n == 0)
-    {
-        dp[m][n]=0;
-    }
-
-    else
-    {
-        if(s1[m-1]==s2[n-1])b//a 
-        {
-            
-           // dp[m][n] = 1+lcs(dp,s1,s2,m-1,n-1);
-           return s1[m-1];
-
-
-        }
-        else
-        {
-            dp[m][n]=max(lcs(dp,s1,s2,m-1,n),lcs(dp,s1,s2,m,n-1)); //ax a
-        }
-        
-    }
-
-    return dp[m][n];
-    
-
-}
-
-string check()
-{
-    string str="abc";
-    return str[0]+"a";
+   int i=m;
+   int j=n;
+   string str="";
+   while(i>0&&j>0)
+   {
+       if(s1[i-1]==s2[j-1])
+       {
+           str+=s1[i-1];//<<endl;
+           i--;
+           j--;
+       }
+       else
+       {
+           if(dp[i-1][j]>=dp[i][j-1])
+           {
+               i--;
+           }
+            else if(dp[i-1][j]<dp[i][j-1])
+           {
+               j--;
+           }
+       }
+   }
+   reverse(str.begin(),str.end());
+   cout<<str<<endl;
 }
 int main()
 
 {
-    string s1="ABC",s2="AC";
+    string s1="ABCXYWYZQRTY",s2="ACWXYWQT";
     
     int dp[M][N]={-1};
    for(int i=0;i<=s1.length();i++)
@@ -107,8 +101,10 @@ int main()
    } 
 
     cout<<lcs(dp,s1,s2,s1.length(),s2.length())<<endl;
-    cout<<lcs_2(s1,s2,s1.length(),s2.length())<<endl;
+   // cout<<lcs_2(s1,s2,s1.length(),s2.length())<<endl;
 
-    cout<<check();
+
+    lcs_print(dp,s1,s2,s1.length(),s2.length());
+
 
 }

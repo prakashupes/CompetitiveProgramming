@@ -77,8 +77,18 @@ bool search(TrieNode *root, string word)
         for(int d = 0; d < 8; d++){
             int nr = row + row_offset[d]; // new cell to explore - neighbor
             int nc = col + col_offset[d];  
-            if(nr < 0 || nr >= 4 || nc < 0 || nc >= 4) continue;
-            if(board[nr][nc] == '$' || root->Child[board[nr][nc] - 'a'] == nullptr ) continue;
+            if(nr < 0 || nr >= 4 || nc < 0 || nc >= 4 )  continue;
+            if(board[nr][nc] == '$') continue;
+            if(board[nr][nc]=='*')
+            {
+               for(int k=0;k<26;k++)
+                    {
+                        char c='a'+k;
+                        if(root->Child[k])
+                             backtracking(nr, nc, board, ret, root->Child[k], prefix + c);
+                    } 
+            }
+            else if(root->Child[board[nr][nc] - 'a']) 
             backtracking(nr, nc, board, ret, root->Child[board[nr][nc] - 'a'], prefix + board[nr][nc]);
         }
         board[row][col] = letter;
@@ -104,16 +114,16 @@ bool search(TrieNode *root, string word)
         string prefix="";
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                if(board[i][j]='*')
+                if(board[i][j]=='*')
                 {
                     for(int k=0;k<26;k++)
                     {
-                        char c=
+                        char c='a'+k;
                         if(root->Child[k])
-                             backtracking(i, j, board, ret, root->Child[k]], prefix + board[i][j]);
+                             backtracking(i, j, board, ret, root->Child[k], prefix + c);
                     }
                 }
-                if(root->Child[board[i][j] - 'a']) 
+                else if(root->Child[board[i][j] - 'a']) 
                    backtracking(i, j, board, ret, root->Child[board[i][j] - 'a'], prefix + board[i][j]);
             }
         } 
@@ -123,14 +133,15 @@ bool search(TrieNode *root, string word)
 
     int main()
     {
+        
         vector<vector<char>> board = {
-                    {'m', 's', 'e', 'f'},
+                    {'c', '*', 't', 'f'},
                     {'r', 'a', 't', 'd'},
                     {'l', 'o', 'n', 'e'},
                     {'k', 'a', 'f', 'b'}
         };
 
-        vector <string> dictonary  = { "start", "note", "sand", "stoned"};
+        vector <string> dictonary  = { "start", "note", "sand", "stoned","cat","cut","danb","cot","coy","ptf","ptef","ppt","aaoa"};
         vector<string>ans= findWords(board,dictonary);
 
         for(auto x:ans) cout<<x<<" ";

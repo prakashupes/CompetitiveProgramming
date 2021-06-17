@@ -1,3 +1,7 @@
+
+
+
+
 #include<iostream>
 using namespace std;
 //Push 1 : push into stack1

@@ -1,5 +1,41 @@
 #include<iostream>
 using namespace std;
+//Stack using linked list
+
+/*Approach:
+if we use insert in last 1->2,->3
+push(4);
+we need to traverse 1->2->3->4.
+same for pop()
+
+if we make tail pointer:
+1->2->3
+push(4);
+push at tail position: that will take O(1) 
+but for pop();
+it will again take o(n)
+
+So approach 1:
+make a dubly linked list:
+
+Approach 2: Insert at head pointer:
+
+1->2->3
+push(4); 
+for that
+temp(4);
+temp->next=head;
+head=temp;
+
+pop();
+4->1->2->3;
+
+temp=head;
+head=head-next;
+delete(temp);
+*/
+
+
 
 template <class type2>
 struct Node
@@ -38,6 +74,11 @@ class myStack
 	type top()
 	{
 		return head->data;
+	}
+
+	bool isEmpty()
+	{
+		return (head==NULL);
 	}
 
 

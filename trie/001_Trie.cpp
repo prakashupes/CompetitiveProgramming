@@ -44,7 +44,8 @@ bool search(TrieNode *root, string word)
         }
         ref=ref->nodes[index];
     }
-    return true;
+    return true; //not more relialable ... (read next line)
+    //return (ref!=NULL && ref->isEnd); //Or if you want to search substring also then remove ref->end condition
 }
 
 int main()
@@ -64,7 +65,7 @@ int main()
     
     search(root, "bat")? cout << "Yes\n" :
                          cout << "No\n";
-    search(root, "ba")? cout << "Yes\n" :
+    search(root, "batse")? cout << "Yes\n" :
                            cout << "No\n";
                            
     return 0;

@@ -14,9 +14,12 @@ const vector<int> row_offset = { -1, -1, -1, 0, 1, 0, 1, 1 };
 const vector<int> col_offset =  { -1, 1, 0, -1, -1, 1, 0, 1 };
 
 //Utility Functions:
-unordered_map<string,bool> getDictionary(); //Utility Methods to read dictionary from file and it returns a map of string and bool
-vector<vector<char>> getBoard();    //Utility Methods to read dictionary from file and it returns a board
-
+unordered_map<string,bool> getdictionaryionary(); //Utility Methods to read dictionaryionary from file and it returns a map of string and bool
+vector<vector<char>> getBoard();    //Utility Methods to read dictionaryionary from file and it returns a board
+void printBoard(vector<vector<char>>);
+void printDicitonary(unordered_map<string,bool>);
+unordered_map<string,bool> getdictionaryionaryFromFile(); //Utility Methods to read dictionaryionary from file and it returns a map of string and bool
+vector<vector<char>> getBoardFromFile();  
 
 /***********************Trie Data Structure Part**********************/
 typedef struct TrieNode
@@ -69,10 +72,10 @@ bool search(TrieNode *root, string word)
 
 // A backtracing method to solve the boggle word problem
 
-void boggle_solver(int row, int col, vector<vector<char>> board, unordered_map<string,bool>& dict, TrieNode* root, const string& prefix)
+void boggle_solver(int row, int col, vector<vector<char>> board, unordered_map<string,bool>& dictionary, TrieNode* root, const string& prefix)
 {
     if(root->isEnd){
-        dict[prefix]=true;
+        dictionary[prefix]=true;
         root->isEnd = false; //to avoid duplicate the word
     }
     char letter = board[row][col]; 
@@ -88,11 +91,11 @@ void boggle_solver(int row, int col, vector<vector<char>> board, unordered_map<s
                 {
                     char c='a'+k;
                     if(root->Child[k])
-                        boggle_solver(nr, nc, board, dict, root->Child[k], prefix + c);
+                        boggle_solver(nr, nc, board, dictionary, root->Child[k], prefix + c);
                 } 
         }
         else if(root->Child[board[nr][nc] - 'a']) 
-            boggle_solver(nr, nc, board, dict, root->Child[board[nr][nc] - 'a'], prefix + board[nr][nc]);
+            boggle_solver(nr, nc, board, dictionary, root->Child[board[nr][nc] - 'a'], prefix + board[nr][nc]);
         }
         board[row][col] = letter;
     }
@@ -100,10 +103,10 @@ void boggle_solver(int row, int col, vector<vector<char>> board, unordered_map<s
 
 //Helper function
 
-void helper(vector<vector<char>>& board,unordered_map<string,bool>& dict) {
+void helper(vector<vector<char>>& board,unordered_map<string,bool>& dictionary) {
         
         TrieNode *root=new TrieNode();
-        for(auto x: dict) 
+        for(auto x: dictionary) 
         {
             
             insert(root,x.first);
@@ -118,11 +121,11 @@ void helper(vector<vector<char>>& board,unordered_map<string,bool>& dict) {
                     {
                         char c='a'+k;
                         if(root->Child[k])
-                             boggle_solver(i, j, board, dict, root->Child[k], prefix + c);
+                             boggle_solver(i, j, board, dictionary, root->Child[k], prefix + c);
                     }
                 }
                 else if(root->Child[board[i][j] - 'a']) 
-                   boggle_solver(i, j, board, dict, root->Child[board[i][j] - 'a'], prefix + board[i][j]);
+                   boggle_solver(i, j, board, dictionary, root->Child[board[i][j] - 'a'], prefix + board[i][j]);
             }
         } 
         
@@ -132,15 +135,15 @@ void helper(vector<vector<char>>& board,unordered_map<string,bool>& dict) {
 
 
 //Part-1 solution : Check if user entered word is valid and present in board
-void findWord(unordered_map<string,bool>dict)
+void findWord(unordered_map<string,bool>dictionary)
 {
     cout<<"Enter word to search in board: ";
     string str;
     cin>>str;
 
-    if(dict.find(str)!=dict.end() && dict[str]==true)
+    if(dictionary.find(str)!=dictionary.end() && dictionary[str]==true)
     {
-        cout<<"Word founded and present in the dictonary/valid word"<<endl;
+        cout<<"Word founded and present in the dictionaryonary/valid word"<<endl;
     }
     else
     {
@@ -150,12 +153,12 @@ void findWord(unordered_map<string,bool>dict)
 }
 
 //print all solution
-void printAllWords(unordered_map<string,bool>dict)
+void printAllWords(unordered_map<string,bool>dictionary)
 {
-    cout<<"\nPrinting all posible words present in dictonary :"<<endl;
-    for(auto x:dict)
+    cout<<"\nPrinting all posible words :"<<endl;
+    for(auto x:dictionary)
     {
-        if(x.second==true) cout<<x.first<<" ";
+        if(x.second==true) cout<<x.first<<" \n";
     }
     cout<<endl;
 }
@@ -165,26 +168,84 @@ void printAllWords(unordered_map<string,bool>dict)
 //Main Driver Method
 int main()
 {
+        cout<<"Instructions:\n1. Please un-comment line #177 and #178 and comment line #174 and #175 to take input from file"<<endl;
+        cout<<"2. Please place you manual files in same foldar as solution.cpp"<<endl;
 
-        unordered_map<string,bool> dict= getDictionary();
-        vector<vector<char>> board = getBoard();
-        helper(board,dict);
-        /*
-        To run manually one by one metods you can comment one of the following
-        */
-        
-        findWord(dict);
-        printAllWords(dict);
+        //unordered_map<string,bool> dictionary= getdictionaryionary();
+        //vector<vector<char>> board = getBoard();
+		
+		unordered_map<string,bool> dictionary= getdictionaryionaryFromFile();
+        vector<vector<char>> board = getBoardFromFile();
+		
+		printBoard(board);
+		printDicitonary(dictionary);
+		
+        helper(board,dictionary);
+        findWord(dictionary);
+        printAllWords(dictionary);
 
     }
 
 
 
-//defination of utility functions
-//Method to get all words from file    
-unordered_map<string,bool> getDictionary()
+/***********************defination of utility functions*******************/
+//Method to get all words from file 
+
+ unordered_map<string,bool>  getdictionaryionary()
+ {
+	 unordered_map<string,bool> dict;// getDictionary();
+     dict["geek"]=false;
+     dict["love"]=false;
+     dict["loves"]=false;
+     dict["boat"]=false;
+     dict["boss"]=false;
+     dict["loss"]=false;
+     dict["lose"]=false;
+     dict["gizy"]=false;
+     dict["awer"]=false;
+     dict["eeqpe"]=false;
+	 dict["ray"]=false;
+	 dict["rise"]=false;
+	 dict["stop"]=false;
+	 return dict;
+	 
+ }
+ vector<vector<char>> getBoard(){
+			vector<vector<char>> board ={{'g', 'i', 'z','*'},
+                                    {'b', 'o', '*','s'},
+                                    {'q', 'r', 'e','s'},
+                                    {'l', 'o', 'v','*'}};
+			return board;
+}
+
+void printBoard( vector<vector<char>> board)
 {
-    unordered_map<string,bool> dict;
+	cout<<"Board Is:"<<endl;
+	for(int i=0;i<4;i++){
+		for(int j=0;j<4;j++){
+			cout<<board[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+		
+}
+
+void printDicitonary( unordered_map<string,bool> dictionary)
+{
+	cout<<"Dictionary Is:\n{";
+	for(auto x: dictionary) 
+        {
+            
+            cout<<x.first<<", ";
+        }
+	cout<<"}"<<endl;
+        
+	
+}
+   
+unordered_map<string,bool> getdictionaryionaryFromFile()
+{
+    unordered_map<string,bool> dictionary;
 
     ifstream file;
     file.open("dictionary.txt");
@@ -199,7 +260,7 @@ unordered_map<string,bool> getDictionary()
         if(ch==',')
         {
             transform(s.begin(), s.end(), s.begin(), ::tolower);
-            dict.insert({s,false});
+            dictionary.insert({s,false});
             s="";
         }
         else
@@ -208,11 +269,11 @@ unordered_map<string,bool> getDictionary()
         }  
     }
     file.close();
-    return dict;
+    return dictionary;
 }
 
 //utility methods to make board from input file
-vector<vector<char>> getBoard()
+vector<vector<char>> getBoardFromFile()
 {  
     vector<vector<char>> board(4);
     for(int i=0;i<4;i++)

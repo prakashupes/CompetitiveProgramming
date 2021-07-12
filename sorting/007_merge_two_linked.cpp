@@ -1,4 +1,4 @@
-//Merge two sorted linked list
+//Merge sort two sorted linked list
 #include<iostream>
 using namespace std;
 
@@ -45,6 +45,7 @@ void print(Node *head)
         ref=ref->next;
 
     }
+    cout<<endl;
 }
 
 
@@ -84,13 +85,58 @@ Node* merge(Node *h1, Node* h2)
             h2=h2->next;
         }
     }
+    if(h1==NULL){
+        end->next=h2;
+    }
+    else
+    {
+        end->next=h1;
+            }
 
     return res;
 
 }
 
+//Findig the middle of linked list
+
+void find_middle(Node *head,Node **f, Node** s)
+{
+    Node *fast=head;
+    Node *slow=head;
+
+    while(fast)
+    {
+        fast=fast->next->next;
+        if(fast) slow=slow->next;
+    }
+
+    //slow is middle
+    //cout<<slow->val<<" ";
+    *f=head;
+    *s=slow->next;
+    slow->next=NULL;
+}
+//Merge sort
+void merge_sort(Node ** head)
+{
+    if(!*head || !(*head)->next) return;
+
+    Node* first=NULL;
+    Node* second= NULL;
+
+    find_middle(*head,&first,&second);
+   
+    merge_sort(&first);
+    merge_sort(&second);
+    
+    *head=merge(first,second);
+    
+}
+
+
 int main()
 {
+    /*
     Node *head=NULL;
 
    // cout<<&head<<" ";
@@ -98,10 +144,12 @@ int main()
     insert(head,3);
     insert(head,5);
     insert(head,9);
+
+
     /*
     :From the next time we do not write head=insert(head,1); becz the address of Node *head of insert also remain same, 
     and once we have assigned head=insert(head,1); then it always point to this.
-    */
+    
    
    // cout<<&head<<" ";
 
@@ -117,4 +165,16 @@ int main()
     
     print(res);
     cout<<endl;
+    */
+
+    //Complete megre sort
+
+    Node *head=NULL;
+    head=insert(head,1);
+    insert(head,33);
+    insert(head,25);
+    insert(head,9);
+    merge_sort(&head);
+
+    print(head);
 }

@@ -104,7 +104,7 @@ void find_middle(Node *head,Node **f, Node** s)
     Node *fast=head;
     Node *slow=head;
 
-    while(fast)
+    while(fast && fast->next)
     {
         fast=fast->next->next;
         if(fast) slow=slow->next;

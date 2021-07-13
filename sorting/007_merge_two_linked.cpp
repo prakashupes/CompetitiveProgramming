@@ -64,7 +64,7 @@ Node* merge(Node *h1, Node* h2)
         res=end=h1;
         h1=h1->next;
     }
-    else if(h1->val > h2->val)
+    else if(h1->val >= h2->val)
     {
         res=end=h2;
         h2=h2->next;

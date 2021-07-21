@@ -1,7 +1,7 @@
 #include<iostream>
 #include<algorithm>
 using namespace std;
-void partition(int arr[],int n,int l)  //lomuto partetion
+int partition(int arr[],int n,int l)  //lomuto partetion
 {
     int p=n-1;
     int i=l-1;
@@ -16,13 +16,14 @@ void partition(int arr[],int n,int l)  //lomuto partetion
     }
 
     swap(arr[i+1],arr[n-1]);
+    return i+1;
 
 }
 
 
 int hoare(int arr[],int h,int l)
 {
-    int p=arr[0];
+    int p=arr[l];
  
     int i=l-1;
     int j=h+1;
@@ -52,11 +53,11 @@ int hoare(int arr[],int h,int l)
 
 int main()
 {
-    int arr[]={3,2,6,8,1,1};
+    int arr[]={1,1};
    //int arr[]={30,40};
     int n = sizeof(arr)/sizeof(arr[0]);
 
-partition(arr,n,0);
+    cout<<partition(arr,n,0);
     for(int i=0;i<n;i++)
     {
         cout<<arr[i]<<" ";

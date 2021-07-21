@@ -31,13 +31,47 @@ void quick_sort(int arr[],int l,int h)
     }
 }
 
+//using hoare
+
+int hoare(int arr[],int l,int h)
+{
+    int p=l;
+    int i=l-1;
+    int j=h+1;
+    
+    while(true)
+    {
+        do{i++;}
+        while (arr[i]<arr[p]);
+        do{j--;}
+        while(arr[j]>arr[p]);
+
+        if(i>=j) return j;
+
+        swap(arr[i],arr[j]);
+ 
+    }
+}
+
+void quick_2(int arr[],int l,int h)
+{
+    if(l<h)
+    {
+        int p=hoare(arr,l,h);
+        quick_2(arr,l,p);
+        quick_2(arr,p+1,h);
+
+    }
+}
+
 int main()
 {
-    int arr[]={3,2,6,-8,1,1};
+    //int arr[]={1,1};
+    int arr[]={2,5,3,9,-1};
     int n=sizeof(arr)/sizeof(arr[0]);
-    quick_sort(arr,0,n);
-
-   // cout<<lomuto(arr,0,n);
+    //quick_sort(arr,0,n);
+    quick_2(arr,0,n-1);
+   // cout<<hoare(arr,0,n-1);
     for(int i=0;i<n;i++)
     {
         cout<<arr[i]<<" ";

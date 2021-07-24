@@ -51,7 +51,7 @@ int largestArea(int arr[],int n)
 int main()
 {
 	//int arr[]={2,4,6,7,3,9};
-	//int arr[]={2,4,6,7,8,9};
+	//int arr[]={2,4,6,7,8,9}; 
 	int arr[]={9,8,7,6,4,3};
 	int n=sizeof(arr)/sizeof(arr[0]);
 	largestArea(arr,n);

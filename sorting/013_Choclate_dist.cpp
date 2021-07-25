@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #define v vector<int>
 #define print_v(v) for(auto x:v) cout<<x<<" " 
+#define print_a(arr,n) for(int ii=0;ii<n;ii++)cout<<arr[ii]<<" " 
 #define line cout<<endline
 using namespace std;
 
@@ -15,11 +16,8 @@ int solver(v v1,int m)
         
         ans= min(ans,temp);
 
-        
-
     }
     return ans;
-
 }
 int main()
 {

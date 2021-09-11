@@ -42,6 +42,7 @@ int bottm_up(int arr[],int n,int total)
             if(total>=arr[j])
             {
                 int ans=1+tbl[total-arr[j]];
+
                 res=res < ans ? res:ans;
                 //cout<<res<<" "<<ans<<endl;
 
@@ -51,6 +52,23 @@ int bottm_up(int arr[],int n,int total)
         tbl[i]=res;
     }
     return dp[total];
+}
+int min(int a,int b)
+{
+    return a<b ? a:b;
+}
+//pick and drop
+int m2(int arr[],int n,int sum)
+{
+    if(sum==0) return 0;
+    if(n==0) return 100000;
+
+    int a1= m2(arr,n-1,sum);
+
+    int a2=100000;
+    if(sum>=arr[n-1])  a2=m2(arr,n-1,sum-arr[n-1])+1;
+
+    return min(a1,a2);
 }
 
 
@@ -65,6 +83,7 @@ int main()
     cout<<endl;
     cout<<bottm_up(arr,n,total);
     cout<<endl;
+   // cout<<m2(arr,n,total);
     
     
    
